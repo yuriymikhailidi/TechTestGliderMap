@@ -86,8 +86,10 @@ export default function Question1 (props) {
             <option>1066</option>
           </select>
         </div>
-
-        {errormessage}
+        
+        <div>
+          {errormessage}
+        </div>
 
         <button type="submit" style={{margin: 10}}>Submit</button>
       </div>

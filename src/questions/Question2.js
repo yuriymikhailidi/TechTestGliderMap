@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 /* Resources */
 /*
@@ -10,6 +11,7 @@ export default function Question2 (props) {
   // Feel free to refactor as you feel necessary.
 
   const [searchText, setSearchText] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   const shoppingList = [
     'Peanut Butter',
@@ -23,17 +25,27 @@ export default function Question2 (props) {
 
   const handleSearchTextChange = e => {
     setSearchText(e.target.value);
-  }
+  };
+
+  useEffect(() => {
+    const res = shoppingList.filter(item => 
+      item.toLowerCase().includes(searchText)
+    );
+      setSearchResults(res);
+  }, [searchText])
+
   return (
-    <div>
-      <input value={searchText} onChange={handleSearchTextChange}/>
-      {shoppingList.filter(item => item.toLowerCase().includes(searchText.toLowerCase)).map(item => {
-        return (
+    <div className="App">
+      <input
+      type="text"
+      value={searchText} 
+      onChange={handleSearchTextChange}
+      />
+      {searchResults.map(item => (
           <div>
             {item}
           </div>
-        )
-      })}
+      ))}
     </div>
   )
 }
